@@ -13,3 +13,39 @@
 # 注意：请以Unicode的形式输出答案。
 # 你可以通过decode("utf8")来将utf8格式的字符串解码为Unicode，
 # 例如你要输出ans = "零圆", print ans.decode("utf8").
+a =123456
+count = 1
+neg = False
+zero = False
+s = '圆'
+d = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
+if a == 0:
+    print '零圆'
+else:
+    if a < 0:
+        neg = True
+        a = -a
+    while a > 0:
+        if a % 10 == 0:
+            if not zero and s != '圆':
+                s = '零' + s
+                zero = True
+            a /= 10
+            count += 1
+            continue
+        if count == 2:
+            s = '拾' + s
+        elif count == 3:
+            s = '佰' + s
+        elif count == 4:
+            s = '仟' + s
+        elif count == 5:
+            s = '万' + s
+            count -= 4
+        s = d[a % 10] + s
+        a /= 10
+        count += 1
+        zero = False
+    if neg:
+        s = '负' + s
+    print s.decode("utf8")
